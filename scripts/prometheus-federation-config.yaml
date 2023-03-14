@@ -1,0 +1,46 @@
+# General settings
+replicaDaemonSet: true
+
+# Readiness and Liveness configuration
+readinessProbeInitialDelaySeconds: 15
+readinessProbePeriodSeconds: 5
+readinessProbeTimeoutSeconds: 4
+readinessProbeFailureThreshold: 3
+readinessProbeSuccessThreshold: 1
+livenessProbeInitialDelaySeconds: 30
+livenessProbePeriodSeconds: 15
+livenessProbeTimeoutSeconds: 10
+livenessProbeFailureThreshold: 3
+livenessProbeSuccessThreshold: 1
+
+# Image repository and version
+image:
+  repository: prom
+  tag: v2.40.7
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+
+### Instances configuration - Dynamic instances option (replicaDaemonSet=true)
+# You have to configure only one with the type=primary
+# and only one of type=replica (that will be DaemonSet)
+prometheusInstances:
+  - type: primary
+    storageTsdbRetentionTime: "5d"
+    scrapeInterval: 15s
+    scrapeTimeout: 10s
+    environmentVariables:
+      - name: GOGC
+        value: 40
+
+  - type: replica
+    storageTsdbRetentionTime: "1d"
+    scrapeInterval: 15s
+    rulesFile: "files/rules-istio-coredns.yaml"
+    jobs:
+      - namespacesToScrape: [kube-system]
+        labelsToScrape: ["k8s-app=kube-dns"]
+      - namespacesToScrape: [default, microservices]
+
+# Development settings
+developmentMode: true
+developmentHostPath: "/tmp/data"
