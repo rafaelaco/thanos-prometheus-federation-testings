@@ -6,9 +6,9 @@ source "$SCRIPT_DIR/common.sh"
 section "Configuring Sample Workloads"
 
 log "Configuring nginx POD and Service"
-kubectl create deployment nginx --image="nginx"
+kubectl create deployment nginx --image="nginx" --replicas=2
 kubectl expose deployment nginx --port=80 --target-port=80
 
 log "Configuring httpbin POD and Service"
-kubectl create deployment httpbin --image="kennethreitz/httpbin"
+kubectl create deployment httpbin --image="kennethreitz/httpbin" --replicas=2
 kubectl expose deployment httpbin --port=80 --target-port=80

@@ -6,17 +6,14 @@ start-cluster:
 configure-istio:
 	scripts/configure-istio.sh
 
-configure-prometheus:
-	scripts/configure-prometheus.sh
+configure-prometheus-thanos:
+	scripts/configure-prometheus-thanos.sh
 
 configure-sample-workloads:
 	scripts/configure-sample-workloads.sh
 
 generate-traffic:
 	scripts/generate-traffic.sh
-
-# configure-thanos:
-# 	scripts/configure-thanos.sh
 
 delete-cluster:
 	scripts/delete-cluster.sh
