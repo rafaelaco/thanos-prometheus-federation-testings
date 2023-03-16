@@ -1,4 +1,4 @@
-.PHONY: start-cluster configure-istio configure-prometheus configure-sample-workloads generate-traffic configure-thanos delete-cluster
+.PHONY: start-cluster configure-istio configure-prometheus-thanos configure-sample-workloads generate-traffic delete-cluster
 
 start-cluster:
 	scripts/start-cluster.sh
