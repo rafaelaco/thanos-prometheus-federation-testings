@@ -10,8 +10,7 @@ CYA='\033[1;96m'
 END='\033[0m'
 BLOCK='\033[1;37m'
 CLUSTER_NAME="thanos-prom"
-SERVER_DIRECTORY="/tmp/k3d-server"
-AGENT_DIRECTORY="/tmp/k3d-agents"
+CLUSTER_DIRECTORY="/tmp/k3d-data"
 
 function log() {
     if [[ $2 == "error" ]]; then
