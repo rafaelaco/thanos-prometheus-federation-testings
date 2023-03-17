@@ -22,6 +22,6 @@ helm template prom "$SCRIPT_DIR/prom/" -n $PROM_NAMESPACE \
 
 rm -rf "$SCRIPT_DIR/prom/"
 
-sleep 40
+sleep 60
 log "Permission to folder $CLUSTER_DIRECTORY"
 sudo chmod 777 -R $CLUSTER_DIRECTORY
