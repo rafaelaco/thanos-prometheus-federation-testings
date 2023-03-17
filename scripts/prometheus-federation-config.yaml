@@ -24,8 +24,19 @@ thanos:
     tag: v0.30.2
     pullPolicy: IfNotPresent
     pullSecrets: []
+  federation:
+    scrapeInterval: 1m
+    scrapeTimeout: 15s
+  queryFrontend:
+    enabled: true
+    replicas: 1
   query:
     replicas: 1
+  store:
+    enabled: true
+  compactor:
+    enabled: true
+    schedule: "0 02 * * *"
 
 # Image repository and version
 image:
@@ -66,6 +77,29 @@ prometheusInstances:
       - namespacesToScrape: [kube-system]
         labelsToScrape: ["k8s-app=kube-dns"]
       - namespacesToScrape: [default, microservices]
+
+### Instances configuration - Fixed instances option (replicaDaemonSet=false) - DEPRECATED
+# You have to configure only one with the type=primary
+# And you can configure as many as you want of the type=replica
+# The "shards" value inside the "jobs" will split the discovery endpoint between instances
+# prometheusInstances:
+#   - type: primary
+#     storageTsdbRetentionTime: "5d"
+#     environmentVariables:
+#       - name: GOGC
+#         value: 40
+
+#   - type: replica
+#     storageTsdbRetentionTime: "1d"
+#     jobs:
+#       - namespacesToScrape: [kube-system]
+#         labelsToScrape: ["k8s-app=kube-dns"]
+
+#   - type: replica
+#     shards: 5
+#     storageTsdbRetentionTime: "1d"
+#     jobs:
+#       - namespacesToScrape: [microservices]
 
 # Azure Persistent Volume settings
 azurePersistentVolumeResourceGroup: ""
