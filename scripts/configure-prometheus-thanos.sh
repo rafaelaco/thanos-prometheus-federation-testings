@@ -3,7 +3,7 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source "$SCRIPT_DIR/common.sh"
 PROM_NAMESPACE="prometheus-federation-server"
-PROM_BRANCH="adding-thanos"
+PROM_BRANCH="main"
 
 section "Configuring Prometheus Federation"
 
